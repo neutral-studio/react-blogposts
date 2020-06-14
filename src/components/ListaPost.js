@@ -4,24 +4,34 @@ import _ from 'lodash';
 import faker from 'faker';
 
 import { getPosts } from '../redux/actions';
-import Post from './Post';
+import Post from './Post';  
+
+import { getAutore } from '../redux/actions';
 
 class ListaPost extends React.Component {
   componentDidMount() {
     this.props.getPosts();
+    this.props.getAutore();
   }
 
   renderLista() {
-    if (!this.props.posts)
+
+    if (!this.props.posts || !this.props.Autore)
       return (
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       );
 
+    if(this.props.Autore.id === this.props.posts.userId){
+
     return _.values(this.props.posts).map(post => {
-      return <Post dati={post} key={faker.random.uuid()} />;
+      return _.values(this.props.Autore).map(autore =>{
+        return <Post dati={post} autore = {autore} key={faker.random.uuid()}  />;
+
+      });
     });
+ }
   }
 
   render() {
@@ -36,7 +46,13 @@ class ListaPost extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts };
+  return { 
+      posts: state.posts,
+      Autore: state.autore
+  };
 };
 
-export default connect(mapStateToProps, { getPosts })(ListaPost);
+export default connect(mapStateToProps, { 
+    getPosts,
+    getAutore
+  })(ListaPost);

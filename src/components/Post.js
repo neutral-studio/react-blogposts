@@ -9,6 +9,7 @@ class Post extends React.Component {
           <div className="card-body">
             <p>{this.props.dati.body}</p>
           </div>
+          <div className ="card-footer">{this.props.autore.name}</div>
         </div>
       </div>
     );
