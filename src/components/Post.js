@@ -2,6 +2,7 @@ import React from 'react';
 
 class Post extends React.Component {
   render() {
+    if(this.props.dati.userId === this.props.autore.id){
     return (
       <div className="col-xl-4">
         <div className="card shadow border-0 mb-4">
@@ -13,6 +14,10 @@ class Post extends React.Component {
         </div>
       </div>
     );
+    }
+    else{
+      return(null);
+    }
   }
 }
 

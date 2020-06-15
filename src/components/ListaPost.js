@@ -23,15 +23,14 @@ class ListaPost extends React.Component {
         </div>
       );
 
-    if(this.props.Autore.id === this.props.posts.userId){
-
+    
+      
     return _.values(this.props.posts).map(post => {
       return _.values(this.props.Autore).map(autore =>{
         return <Post dati={post} autore = {autore} key={faker.random.uuid()}  />;
 
       });
     });
- }
   }
 
   render() {
